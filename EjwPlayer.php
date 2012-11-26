@@ -1,9 +1,12 @@
 <?php
 	
 /**
- * EJwPlayer
+ * EjwPlayer
+ * Generates a JWPlayer based on V.6
+ * @see http://www.longtailvideo.com for full documentation.
  * @author Paul Szczesmy
  * @version 1.0
+ * @license New BSD License
  */
 class EjwPlayer extends CWidget {
 	
@@ -93,6 +96,11 @@ class EjwPlayer extends CWidget {
 			</script>';
 	}
 	
+	/**
+	 * Add an option to the global option string
+	 * @param String $name The name of the option to add.
+	 * @param String $var (optional) The value of the option.
+	 */
 	private function addOption($name, $var=null) {
 		if(isset($this->$name) && is_array($this->$name))  {
 			$this->recursiveOptions($name, $this->$name);
@@ -101,6 +109,11 @@ class EjwPlayer extends CWidget {
 		elseif(empty($var) && !empty($this->$name)) $this->options .= ''.$name.': "'.$this->$name.'",';
 	}
 	
+	/**
+	 * Adds options recursivley to the global option string. Up to 3 options deep. 
+	 * @param String $name The name of the top-level option
+	 * @param Array $array An array of corresponding keys and values. See usage doc.
+	 */
 	private function recursiveOptions($name, $array) {
 		$this->options .= $name.': [';
 		foreach($array as $key => $value) {
